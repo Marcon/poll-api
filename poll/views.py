@@ -1,9 +1,7 @@
-from django.utils import timezone
 from rest_framework import generics
-from rest_framework.views import APIView
 
 from poll.models import Poll, Question, AnswerVariant, PollParticipation
-from poll.serializers import PollSerializer, QuestionSerializer, AnswerVariantSerializer, PollParticipationSerializer
+from poll.serializers import PollSerializer, PollUpdateSerializer, QuestionSerializer, AnswerVariantSerializer, PollParticipationSerializer
 from poll.permissions import AdminOrReadOnly
 
 
@@ -15,8 +13,12 @@ class PollListView(generics.ListCreateAPIView):
 
 class PolDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Poll.objects.all()
-    serializer_class = PollSerializer
     permission_classes = [AdminOrReadOnly, ]
+
+    def get_serializer_class(self):
+        if self.request.method == 'PUT':
+            return PollUpdateSerializer
+        return PollSerializer
 
 
 class QuestionListView(generics.ListCreateAPIView):

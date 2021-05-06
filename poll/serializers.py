@@ -10,6 +10,14 @@ class PollSerializer(ModelSerializer):
         fields = ['id', 'title', 'start_date', 'end_date']
 
 
+class PollUpdateSerializer(ModelSerializer):
+    start_date = serializers.DateTimeField(read_only=True, required=False)
+
+    class Meta:
+        model = Poll
+        fields = ['id', 'start_date', 'title', 'end_date']
+
+
 class AnswerVariantSerializer(ModelSerializer):
     question = serializers.PrimaryKeyRelatedField(many=False, queryset=Question.objects.all())
 
