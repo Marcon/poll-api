@@ -1,3 +1,4 @@
+from django.utils import timezone
 from rest_framework import generics
 
 from poll.models import Poll, Question, AnswerVariant, PollParticipation
@@ -6,13 +7,13 @@ from poll.permissions import AdminOrReadOnly
 
 
 class PollListView(generics.ListCreateAPIView):
-    queryset = Poll.objects.filter()
+    queryset = Poll.objects.filter(start_date__lte=timezone.now(), end_date__gte=timezone.now())
     serializer_class = PollSerializer
     permission_classes = [AdminOrReadOnly, ]
 
 
 class PolDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Poll.objects.all()
+    queryset = Poll.objects.filter(start_date__lte=timezone.now(), end_date__gte=timezone.now())
     permission_classes = [AdminOrReadOnly, ]
 
     def get_serializer_class(self):
