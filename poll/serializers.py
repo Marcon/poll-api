@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 from .models import Poll, Question, AnswerVariant, PollParticipation, ParticipantAnswer, ChosenVariant
-from .validators import ActivePollValidator
+from .validators import ActivePollValidator, AnswerVariantValidator
 
 
 class PollSerializer(ModelSerializer):
@@ -39,6 +39,7 @@ class ParticipantAnswerSerializer(ModelSerializer):
 
     class Meta:
         model = ParticipantAnswer
+        validators = [AnswerVariantValidator(), ]
         fields = ['id', 'question', 'text', 'variants']
 
 
