@@ -4,23 +4,34 @@ Accept: application/json
 ###
 POST http://127.0.0.1:8000/polls/
 Content-Type: application/json
-Authorization: Token afb5b921154ac4d161f0a7b905e4e9e4e7c2f9fc
+Authorization: Token 96836753d98b228f3f71f88102695be9097c777c
 
 {
-  "title": "test poll",
-  "start_date": "2021-05-06T19:00:00",
-  "end_date": "2022-05-06T19:00:00"
+  "title": "test poll3",
+  "start_date": "2020-05-06T19:00:00",
+  "end_date": "2021-05-05T19:00:00"
+}
+
+###
+PUT http://127.0.0.1:8000/polls/3/
+Content-Type: application/json
+Authorization: Token 96836753d98b228f3f71f88102695be9097c777c
+
+{
+"title": "test poll33",
+"start_date": "2021-05-06T18:00:00",
+"end_date": "2022-05-06T18:00:00"
 }
 
 
 ###
-GET http://127.0.0.1:8000/polls/2/
+GET http://127.0.0.1:8000/polls/3/
 Accept: application/json
 
 
 ###
 DELETE http://127.0.0.1:8000/polls/1/
-Authorization: Token afb5b921154ac4d161f0a7b905e4e9e4e7c2f9fc
+Authorization: Token 96836753d98b228f3f71f88102695be9097c777c
 
 
 ###
@@ -31,10 +42,10 @@ Accept: application/json
 ###
 POST http://127.0.0.1:8000/questions/
 Content-Type: application/json
-Authorization: Token afb5b921154ac4d161f0a7b905e4e9e4e7c2f9fc
+Authorization: Token 96836753d98b228f3f71f88102695be9097c777c
 
 {
-  "poll": 2,
+  "poll": 1,
   "text": "multiple_variant_question",
   "question_type": "multiple"
 }
@@ -43,18 +54,6 @@ Authorization: Token afb5b921154ac4d161f0a7b905e4e9e4e7c2f9fc
 GET http://127.0.0.1:8000/questions/1/
 Accept: application/json
 
-
-###
-POST http://127.0.0.1:8000/questions/
-Content-Type: application/json
-Authorization: Token 98fb6429b65eed4017af10b4bcadaa9d52c08d95
-
-{
-  "poll": 1,
-  "text": "test 2",
-  "question_type": 2
-}
-
 ###
 GET http://127.0.0.1:8000/variants/
 Accept: application/json
@@ -62,7 +61,7 @@ Accept: application/json
 ###
 POST http://127.0.0.1:8000/variants/
 Content-Type: application/json
-Authorization: Token afb5b921154ac4d161f0a7b905e4e9e4e7c2f9fc
+Authorization: Token 96836753d98b228f3f71f88102695be9097c777c
 
 {
   "question": 3,
@@ -85,7 +84,7 @@ POST http://localhost:8000/answers/
 Content-Type: application/json
 
 {
-  "poll": 2,
+  "poll": 1,
   "participant_id": 10000,
   "answers": [
     {
@@ -94,12 +93,12 @@ Content-Type: application/json
     },
     {
       "question": 2,
-      "variants": [3]
+      "variants": [2]
     },
     {
       "question": 3,
       "answer_variant": null,
-      "variants": [7,8]
+      "variants": [5,6]
     }
   ]
 }
