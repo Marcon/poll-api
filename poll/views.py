@@ -59,7 +59,8 @@ class PollParticipationView(generics.CreateAPIView):
     serializer_class = PollParticipationSerializer
 
 
-class PollParticipationDetailsView(generics.RetrieveAPIView):
-    queryset = PollParticipation.objects.all()
+class PollParticipationDetailsView(generics.ListAPIView):
     serializer_class = PollParticipationSerializer
-    lookup_field = 'participant_id'
+
+    def get_queryset(self):
+        return PollParticipation.objects.filter(participant_id=self.kwargs['participant_id'])
