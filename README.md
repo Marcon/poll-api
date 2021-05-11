@@ -139,4 +139,7 @@ text - текст ответа
 
 variants - массив с id выбранных вариантов ответа
 
+/answers/:participantId/
+GET - детализация пройденных опросов пользователя с id participantId
+
 
